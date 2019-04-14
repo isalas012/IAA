@@ -28,10 +28,11 @@ int job_compare_SPT(std::vector<int> v, std::vector<vector<int>> time);
 int job_compare_LPT(std::vector<int> v, std::vector<vector<int>> time);
 int job_compare_LRPT(std::vector<int> v, std::vector<vector<int>> time);
 int job_compare_SRPT(std::vector<int> v, std::vector<vector<int>> time);
-void greedy(problem_data data);
+void greedy(problem_data data, const char* problem_name);
 void printMatrix(std::vector<vector<int>> &M);
 void printVector(vector<int> &M);
 int elementNotInMatrix(std::vector<int> &M, int element);
+void writeToFile(const char* problem_name, int time, std::vector<vector<int>> result);
 
 
 
@@ -40,14 +41,25 @@ int elementNotInMatrix(std::vector<int> &M, int element);
 
 int main(int argc, char const *argv[])
 {
-	problem_data data = getData("instance.txt");
-	cout << "Jobs: " << data.J << endl;
-	cout << "Machines: " << data.M << endl;
-  printMatrix(data.OM);
-  printMatrix(data.CM);
-  //printMatrix(data.J, data.M, data.OM);
-  //printMatrix(data.J, data.M, data.CM);
-  greedy(data);
+  ofstream file;
+  file.open("results.txt");
+  file.close();
+  std::vector<string> instance = {"abz5", "abz6", "abz7", "abz8", "swv01", "swv02", "swv03"};
+  for (size_t i = 0; i < instance.size(); i++) {
+    string file_name = "instancias/" + instance[i] + ".txt";
+    cout << "nombre:  " << file_name << endl;
+    char *file_name_c = &file_name[0u];
+    problem_data data = getData(file_name_c);
+  	cout << "Jobs: " << data.J << endl;
+  	cout << "Machines: " << data.M << endl;
+    printMatrix(data.OM);
+    printMatrix(data.CM);
+    //printMatrix(data.J, data.M, data.OM);
+    //printMatrix(data.J, data.M, data.CM);
+    char *instance_c = &instance[i][0u];
+    greedy(data, instance_c);
+  }
+
 	return 0;
 }
 
@@ -160,7 +172,7 @@ int elementNotInMatrix(std::vector<int> &M, int element){
 }
 
 
-void greedy(problem_data data){
+void greedy(problem_data data, const char* problem_name){
   std::vector<vector<int>> r_jobs = data.OM; // remaining jobs
   std::vector<vector<int>> r_times = data.CM; // remaining times
   std::vector<int> machines_o; //machines operation
@@ -228,6 +240,7 @@ void greedy(problem_data data){
       cout << "FinaleOrder" << endl;
       printMatrix(finalOrder);
       cout << "Total time: " << total_time << endl;
+      writeToFile(problem_name, total_time, finalOrder);
       break;
     }
     ////cout << "Machines queues" << endl;
@@ -345,4 +358,24 @@ int job_compare_SRPT(std::vector<int> v, std::vector<vector<int>> time){
     }
   }
   return v[max_pos];
+}
+
+void writeToFile(const char* problem_name, int time, std::vector<vector<int>> result){
+  ofstream file;
+  file.open("results.txt", std::ios_base::app);
+  file << problem_name;
+  file << "\n  \n";
+  file << time;
+  file << "\n  \n";
+  for(std::vector<vector<int>>::size_type x=0;x<result.size();x++)  // loop 3 times for three lines
+    {
+      for(std::vector<int>::size_type y=0;y<result[x].size();y++)  // loop for the three elements on the line
+      {
+        file << result[x][y];
+        file << " ";
+      }
+      file << "\n";
+    }
+  file << "----------------------------------------------------------------\n";
+  file.close();
 }

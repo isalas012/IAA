@@ -6,7 +6,7 @@ Ignacio Salas Mateluna
 ### Instrucciones de ejecución
 
 - Para compilar utilizar make
-- Para ejecutar utilizar "./main"
+- Para ejecutar utilizar "./main.out"
 
 ### Consideraciones
 

@@ -44,7 +44,7 @@ int main(int argc, char const *argv[])
   ofstream file;
   file.open("results.txt");
   file.close();
-  std::vector<string> instance = {"abz5", "abz6", "abz7", "abz8", "swv01", "swv02", "swv03"};
+  std::vector<string> instance = {"orb01", "orb02", "orb03", "orb04", "abz5", "abz6", "abz7", "abz8", "swv01", "swv02", "swv03", "swv11", "swv12", "swv13"};
   for (size_t i = 0; i < instance.size(); i++) {
     string file_name = "instancias/" + instance[i] + ".txt";
     cout << "nombre:  " << file_name << endl;
@@ -211,11 +211,10 @@ void greedy(problem_data data, const char* problem_name){
     for (int i = 0; i < data.M; i++) {
       if (machines_o[i] == -1) {
         if (q_machines[i].size() > 1) {
-          //int selected_job = job_compare_SPT(q_machines[i], r_times);
+          int selected_job = job_compare_SPT(q_machines[i], r_times);
           //int selected_job = job_compare_LPT(q_machines[i], r_times);
-          int selected_job = job_compare_SRPT(q_machines[i], r_times);
+          //int selected_job = job_compare_SRPT(q_machines[i], r_times);
           //int selected_job = job_compare_LRPT(q_machines[i], r_times);
-          //int selected_job = job_compare(q_machines[i], r_times);
           //q_machines[i].erase(q_machines[i].begin(), q_machines[i].begin() + q_machines[i].size());
           machines_o[i] = selected_job;
           t_machines[i] = r_times[selected_job][0];

@@ -275,13 +275,13 @@ void greedy(problem_data data, const char* problem_name){
     //printMatrix(finalOrder);
   }
 }
-//1370
+
 int job_compare(std::vector<int> v,  std::vector<vector<int>> time){
   int num = v[0];
   return num;
 }
 
-//1362
+
 int job_compare_SPT(std::vector<int> v, std::vector<vector<int>> time){
   std::vector<int> job_time;
   for (std::vector<int>::size_type i = 0; i < v.size(); i++) {
@@ -299,7 +299,7 @@ int job_compare_SPT(std::vector<int> v, std::vector<vector<int>> time){
   return v[max_pos];
 }
 
-//1586
+
 int job_compare_LPT(std::vector<int> v, std::vector<vector<int>> time){
   std::vector<int> job_time;
   for (std::vector<int>::size_type i = 0; i < v.size(); i++) {
@@ -317,7 +317,7 @@ int job_compare_LPT(std::vector<int> v, std::vector<vector<int>> time){
   return v[max_pos];
 }
 
-//1369
+
 int job_compare_LRPT(std::vector<int> v, std::vector<vector<int>> time){
   std::vector<int> job_time;
   for (std::vector<int>::size_type i = 0; i < v.size(); i++) {
@@ -338,7 +338,7 @@ int job_compare_LRPT(std::vector<int> v, std::vector<vector<int>> time){
   return v[max_pos];
 }
 
-//1735
+
 int job_compare_SRPT(std::vector<int> v, std::vector<vector<int>> time){
   std::vector<int> job_time;
   for (std::vector<int>::size_type i = 0; i < v.size(); i++) {

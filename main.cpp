@@ -44,20 +44,38 @@ int main(int argc, char const *argv[])
   ofstream file;
   file.open("results.txt");
   file.close();
-  std::vector<string> instance = {"orb01", "orb02", "orb03", "orb04", "abz5", "abz6", "abz7", "abz8", "swv01", "swv02", "swv03", "swv11", "swv12", "swv13"};
-  for (size_t i = 0; i < instance.size(); i++) {
-    string file_name = "instancias/" + instance[i] + ".txt";
+
+  if (argc>1)
+  {
+    string file_name = argv[1];
     cout << "nombre:  " << file_name << endl;
     char *file_name_c = &file_name[0u];
     problem_data data = getData(file_name_c);
-  	cout << "Jobs: " << data.J << endl;
-  	cout << "Machines: " << data.M << endl;
+    cout << "Jobs: " << data.J << endl;
+    cout << "Machines: " << data.M << endl;
     printMatrix(data.OM);
     printMatrix(data.CM);
     //printMatrix(data.J, data.M, data.OM);
     //printMatrix(data.J, data.M, data.CM);
-    char *instance_c = &instance[i][0u];
+    char *instance_c = &file_name[0u];
     greedy(data, instance_c);
+  }
+  else{
+    std::vector<string> instance = {"orb01", "orb02", "orb03", "orb04", "abz5", "abz6", "abz7", "abz8", "swv01", "swv02", "swv03", "swv11", "swv12", "swv13"};
+    for (size_t i = 0; i < instance.size(); i++) {
+      string file_name = "instancias/" + instance[i] + ".txt";
+      cout << "nombre:  " << file_name << endl;
+      char *file_name_c = &file_name[0u];
+      problem_data data = getData(file_name_c);
+    	cout << "Jobs: " << data.J << endl;
+    	cout << "Machines: " << data.M << endl;
+      printMatrix(data.OM);
+      printMatrix(data.CM);
+      //printMatrix(data.J, data.M, data.OM);
+      //printMatrix(data.J, data.M, data.CM);
+      char *instance_c = &instance[i][0u];
+      greedy(data, instance_c);
+    }
   }
 
 	return 0;

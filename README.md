@@ -6,17 +6,13 @@ Ignacio Salas Mateluna
 ### Instrucciones de ejecución
 
 - Para compilar utilizar make
-- Para ejecutar utilizar "./main.out"
+- Para ejecutar utilizar "./main.out ubicación_instancia"
+- Ejemplo: "./main.out instancias/abz5.txt"
+- El resultado sera entregado en el archivo results.txt incluyendo ubicación, tiempo y matriz de asignación
 
 ### Consideraciones
 
-- El programa se ejecuta para varias instacias a la vez.
-
-- El programa consdiera las instacias que estan especificadas en la linea 47 del codigo.
-
-- Si se desea agregar una nueva instacia esta se debe agregar en la carpeta "instancias" y en la linea 47 del codigo en el vector instance.
-
-- Los resultados para todas las instancias de la ejecución son entregados en el archivo results.txt. Cada instancia incluye nombre, tiempo y matriz de asignación
+- El programa se ejecuta para todas las instancias utilizadas en el informe al utilizas el comando "./main.out" sin especificar la ubicación. En este caso el programa consdiera las instacias que estan especificadas en la linea 47 del codigo. Si se desea agregar una nueva instacia a esta modalidad se debe agregar en la carpeta "instancias" y en la linea 64 del codigo (siguiendo el formato) en el vector instance. Los resultados para todas las instancias de la ejecución son entregados en el archivo results.txt. Cada instancia incluye nombre, tiempo y matriz de asignación
 
 - Se implementaron 4 funciones para la resolución de los conflictos: SPT, LPT, SRPT, LRPT. Por defecto el programa utiliza SPT, si se desea modificar se debe comentar la linea 214 y descomentar alguna de las lineas siguiente.
 

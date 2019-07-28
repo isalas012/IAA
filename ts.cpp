@@ -171,6 +171,7 @@ public:
     //printNodes();
     EST2();  
     nodes[nodes.size()-1].info.LCT = nodes[nodes.size()-1].info.EST;
+    //nodes[nodes.size()-1].info.LCT  = EST(0);
     //printNodes();
     LCT(0);
     //printNodes();
@@ -206,15 +207,20 @@ public:
     std::vector<int> v = {0};
     int count = 0;
     int last = nodes.size()-1;
+    //cout << nodes[v[0]].info.EST << endl;
     while(count < nodes.size()-1){
+      //cout << count << endl;
       //printVector(v);
       if (nodes[v[0]].info.EST != -1)
       {
         for (int i = 0; i < nodes[v[0]].to.size(); ++i)
         {
-          v.push_back(nodes[v[0]].to[i]);
-          v.erase (v.begin());
+          if (nodes[nodes[v[0]].to[i]].info.EST == -1)
+          {
+            v.push_back(nodes[v[0]].to[i]);
+          }
         }
+        v.erase (v.begin());
       }
       else{
         int ready = 1;
@@ -766,7 +772,7 @@ void tabuSearch(problem_data data, const char* problem_name){
   std::cout << "Largo lista tabu: " << tl.max_len << '\n';
   result first_result = r;
   result best_result = r;
-  for (int i = 0; i < 75; ++i)
+  for (int i = 0; i < 1000; ++i)
   {
     std::cout << "tabuSearch iteration " << i << "\n";
     //printMatrix(tl.list);
@@ -795,7 +801,7 @@ result CPM(problem_data data, result r, tabuList &tl){
     //cout << "CMP" << endl;
     Graph graph(data, r.RM);
     std::vector<std::vector<int>> swap = graph.swapCandidates();
-    //cout << "SWAP" << endl;
+    //cout << "SWAP: " << swap.size() << endl;
     //printMatrix(swap);
     result new_best;
     new_best.makeSpan = 100000000;
